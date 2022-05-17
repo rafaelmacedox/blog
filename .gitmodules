@@ -1,0 +1,18 @@
+[submodule "src/themes/ananke"]
+	path = src/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "src/themes/minima"]
+	path = src/themes/minima
+	url = https://github.com/mivinci/hugo-theme-minima.git
+[submodule "src/themes/etch"]
+	path = src/themes/etch
+	url = https://github.com/LukasJoswiak/etch.git
+[submodule "src/themes/harbor"]
+	path = src/themes/harbor
+	url = https://github.com/matsuyoshi30/harbor.git
+[submodule "src/themes/paper"]
+	path = src/themes/paper
+	url = https://github.com/nanxiaobei/hugo-paper
+[submodule "personal/themes/minima"]
+	path = personal/themes/minima
+	url = https://github.com/mivinci/hugo-theme-minima.git
