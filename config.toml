@@ -1,4 +1,4 @@
-baseURL = "https://rafaelmacedox.github.io/blog/"
+baseURL = "https://rafamacedo.dev"
 author = "Rafael Macedo"
 copyright = "Copyright © 2008–2019, Steve Francia and the lee.so; all rights reserved."
 paginate = 6
