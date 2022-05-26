@@ -1,12 +1,21 @@
----
-title: "Docker Dicas Para Desenvolvedores"
-date: 2022-05-19T01:24:47-03:00
-draft: true
----
++++
+title = "🐳 Docker: Guia rápido para desenvolvedores"
+date = 2022-05-25T23:34:47-03:00
+author = "Rafael Macedo"
+description = "Algumas dicas retiradas de anotações pessoais realizadas após um curso sobre Docker para Desenvolvedores"
+tags = [
+    "docker"
+]
+categories = [
+    "dicas", "guia"
+]
++++
 
-Um bom tempo (quase 2 anos hahaha) trabalhei com Docker sem nunca ter simplesmente parado para realmente ver a documentação ou algum curso, e depois de tanto passar sufoco por simplesmente não saber realmente como tudo funciona, resolvi fazer um curso inteiro somente sobre Docker. E hoje, algo meio como um bloco de anotações, vou repassar para você apenas o que eu considero mais importante e útil para a nossa produtividade durante o dia a dia de trabalho como DESENVOLVEDOR. 
+Um bom tempo (quase 2 anos hahaha) trabalhei com Docker sem nunca ter simplesmente parado para realmente ver a documentação ou algum curso, e depois de tanto passar sufoco por simplesmente não saber realmente como tudo funcionava, resolvi fazer um curso completo somente sobre Docker. E hoje, algo meio como um bloco de anotações, vou repassar para você apenas o que eu considero mais importante e útil para a nossa produtividade durante o dia a dia de trabalho como DESENVOLVEDOR. 
 
 Importante ressaltar que é para DEVS, por que caso você seja da área de DevOps, obviamente você precisará ter mais embasamento sobre o que estará sendo dito aqui.
+
+&nbsp;
 
 ## Ambiente
 
@@ -15,21 +24,25 @@ Primeiramente é muito importante ressaltar que o Docker é basicamente um PROCE
 - Namespaces são a forma de isolar processos de um sistema operacional, e basicamente um container é um processo isolado com diversos processos filhos.
 - Cgroups servem para controlar os recursos operacionais do container, como memoria e cpu, de forma que não interfira nos demais recursos da sua máquina (Docker Host).
 
-![Docker Cgroup and namespaces](/static/images/kernel-cgroups-namespaces.jpg)
+![Docker Cgroup and namespaces](/images/kernel-cgroups-namespaces.jpg)
 
 - File System ou OFS (Overlay File System) ajuda o Docker a funcionar em camadas, onde é possível pegar apenas a diferença do que foi alterado e assim não precisando fazer diversas cópias INTEIRAS das coisas.
 
-Então importante lembrar que caso você esteja no Windows e utilizando o Docker Desktop puramente, saiba que você não estará desenvolvendo com 100% da performance que poderia, pois basicamente o Docker Desktop esta virtualizando um SO Linux para utilizar como Docker Host. Por isso é muito bacana, caso esteja desenvolvendo no Windows, utilizar o WSL2 para desfrutar de todos os recursos e performance que o Docker oferece. (Em breve vou fazer um artigo sobre o WSL2 também)
+Então, muito importante lembrar que caso você esteja no Windows e utilizando o Docker Desktop puramente, saiba que você não estará desenvolvendo com 100% da performance que poderia, pois basicamente o Docker Desktop esta virtualizando um SO Linux para utilizar como Docker Host. Por isso é muito bacana, caso esteja desenvolvendo no Windows, utilizar o WSL2 para desfrutar de todos os recursos e performance que o Docker oferece. (Em breve vou fazer um artigo sobre o WSL2 também)
 
-## Docker Visão Geral
+&nbsp;
+
+## Visão Geral
 
 Em uma visão geral, o Docker é composto pelas seguintes partes:
 
-![Docker Overview](/static/images/docker-overview.png)
+![Docker Overview](/images/docker-overview.png)
 
 - Docker Host (O seu computador em sí e onde encontra-se os containers)
-- Client (O terminal do seu computador quem enviará os comandos)
+- Client (O terminal do seu computador que enviará os comandos)
 - Registry (Repositório de imagens para Docker, por exemplo o DockerHub.com)
+
+&nbsp;
 
 ## Primeiros passos
 
@@ -44,7 +57,7 @@ Use: `docker run -d nginx` (Dispatch)
 Use: `docker ps`
 - Lista todos os containers RODANDO
 
-** Interessante olharmos que o container está rodando, possuí um CONTAINER ID e um CONTAINER NAME (isso será útil posteriormente) **
+**Interessante olharmos que o container está rodando, possuí um CONTAINER ID e um CONTAINER NAME (isso será útil posteriormente)**
 
 Use `docker run --name webserver nginx`
 - Cria, inicia um container utilizando o NGINX e o nomeia como 'webserver'
@@ -67,8 +80,11 @@ Use `docker run -it ubuntu bash`
 - '-t (TTY é simplesmente um terminal ao qual você está conectado. Uma interface da qual você pode dar comandos texto a maquina)'
 - 'bash (Meio autoexplicativo, vai abrir o sheel Bash)
 
- ** Também é possível acessar o container como dito acima, porém em containers já ativos.
-Use `docker exec -it nginx bash`
+ **Também é possível acessar o container como dito acima, porém em containers já ativos.
+Use `docker exec -it nginx bash`**
+
+
+&nbsp;
 
 ### Redes
 
@@ -110,6 +126,8 @@ Use: `docker run -p 8080:80 nginx`
 
 Beleza! E agora se precisarmos acessar de DENTRO DO CONTAINER um serviço que está DENTRO DA NOSSA MÁQUINA, como por exemplo, um container NODEJS conectar em um MYSQL que está rodando em nosso windows? Simples! No nodejs basta usar o 'http://host.docker.internal:3306' (no caso o 3306 é a porta padrão do mysql)
 
+&nbsp;
+
 ### Bind Mounts
 
 Vale relembrar que cada container é baseado em uma imagem IMUTÁVEL. Ou seja, não modificamos ela, então todas as vezes que o container é finalizado tudo que fizemos dentro dele é perdido, e pra que isso não aconteça temos a opção de interligar uma pasta do Docker Host no container.
@@ -120,6 +138,7 @@ Use: `docker run -v source/:/usr/share/nginx/html nginx`
 Com isso tudo que for alterado na pasta 'html' dentro do container estará também na pasta 'source' da nossa máquina. 
 **Mesmo que a pasta source ou a pasta html não existam, o docker irá criá-las.**
 
+&nbsp;
 
 ### Volumes
 
@@ -135,15 +154,21 @@ Use: `docker run --mount type=VOLUME,source=MEUVOLUME,target=/usr/share/nginx/ht
 - Irá mapear o volume chamado MEUVOLUME para dentro da pasta HTML do container nginx, e podemos subir quantos containers nginx quisermos utilizando exatamente o mesmo conteúdo.
 
 **Importante para Windows**
-Os volumes criados com o 'wsl2' vão ficar dentro do seguinte caminho:
-'\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes\'
 
-## Imagens e Registries
+&nbsp;
+Os volumes criados com o 'wsl2' irão ficar dentro do seguinte caminho:
+`\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes\`
 
-As imagens vem do DockerHub por padrão, mas as empresas podem ter seus próprios images registry server, como por exemplo o Nexus.
+&nbsp;
+
+### Imagens e Registries
+
+![Docker Images](/images/docker-images.jpg)
+
+As imagens são puxadas do DockerHub por padrão, mas as empresas podem ter seus próprios repositórios de imagens docker privado, como por exemplo o Nexus3.
 
 Use: `docker pull ubuntu`
-- Para somente baixar uma imagem do ubuntu do docker, mas sem subir um container.
+- Somente baixa uma imagem do ubuntu no Docker Host, mas sem iniciar um container.
 
 Use: `docker images`
 - Lista todas as imagens já baixadas.
@@ -151,11 +176,13 @@ Use: `docker images`
 Use: `docker rmi ubuntu`
 - Irá excluir a imagem do Docker Host (sua máquina)
 
+&nbsp;
+
 # Conclusão
 
-Então vou parar por aqui por que creio que já temos dicas o suficiente para um DEV utilizar Docker no dia a dia sem grandes problemas.
+Então vamos parando por aqui, pois já vimos dicas essenciais para que um DEV consiga utilizar Docker no seu dia a dia.
 
-O assunto de imagens Docker é muito mais extenso que imaginamos, com as possibilidades de criarmos nossas próprias imagens com o DockerFile, Docker Composes, utilização em esteiras de CI/CD e diversas outras utilidades, o assunto imagens necessita de um artigo apenas sobre isso. O qual pretendo fazer em breve.
+Ressaltando que o assunto de imagens Docker é muito mais extenso que imaginamos, e com as possibilidades de criarmos nossas próprias imagens com o DockerFile, Docker Composes, utilização em esteiras de CI/CD e diversas outras utilidades, o assunto imagens necessita de um artigo apenas sobre isso. O qual pretendo fazer em breve.
 
 Um grande abraço e até a próxima!
 
