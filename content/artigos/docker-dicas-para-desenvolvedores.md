@@ -1,8 +1,15 @@
----
++++
 title: "Docker Dicas Para Desenvolvedores"
-date: 2022-05-19T01:24:47-03:00
-draft: true
----
+date: 2022-05-25T01:24:47-03:00
+author = "Rafael Macedo"
+description = "Algumas dicas retiradas de anotações pessoais realizadas após um curso sobre Docker para Desenvolvedores"
+tags = [
+    "docker"
+]
+categories = [
+    "dicas"
+]
++++
 
 Um bom tempo (quase 2 anos hahaha) trabalhei com Docker sem nunca ter simplesmente parado para realmente ver a documentação ou algum curso, e depois de tanto passar sufoco por simplesmente não saber realmente como tudo funciona, resolvi fazer um curso inteiro somente sobre Docker. E hoje, algo meio como um bloco de anotações, vou repassar para você apenas o que eu considero mais importante e útil para a nossa produtividade durante o dia a dia de trabalho como DESENVOLVEDOR. 
 
